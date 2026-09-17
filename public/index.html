@@ -26,7 +26,7 @@
       min-height: 100vh;
     }
     .container {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
     }
     .header {
@@ -38,8 +38,8 @@
       padding-bottom: 2rem;
     }
     .cover-img {
-      width: 120px;
-      height: 120px;
+      width: 130px;
+      height: 130px;
       border-radius: 12px;
       object-fit: cover;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
@@ -90,7 +90,7 @@
     .section-title {
       font-size: 1.25rem;
       font-weight: 700;
-      margin-bottom: 1rem;
+      margin: 1.5rem 0 1rem 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -120,17 +120,17 @@
     .ep-meta {
       font-size: 0.85rem;
       color: var(--text-muted);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
     audio {
       width: 100%;
-      margin: 1rem 0;
+      margin: 0.75rem 0;
       border-radius: 8px;
     }
     .ep-summary {
       font-size: 0.95rem;
       color: #cbd5e1;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
     .papers-list {
       background: rgba(15, 23, 42, 0.6);
@@ -189,30 +189,45 @@
 
     <main>
       <div class="section-title">
-        <span>Latest Episode</span>
+        <span>Episodes</span>
       </div>
 
       <article class="episode-card">
-        <span class="ep-badge">Episode 1</span>
-        <h2 class="ep-title">#1: Objective vs. Search: Decomposing Tokenisers + Zeroth-Order Alignment</h2>
-        <div class="ep-meta">Duration: 4m 05s &bull; Standards: EBU R128 (-16 LUFS) &bull; 128 kbps CBR</div>
+        <span class="ep-badge">Episode 2 &bull; Latest</span>
+        <h2 class="ep-title">#2: Objective vs. Search: Decomposing Tokenisers + Zeroth-Order Alignment</h2>
+        <div class="ep-meta">Standards: EBU R128 (-16 LUFS) &bull; 128 kbps CBR &bull; 7.07 MB</div>
         
         <audio controls preload="metadata">
-          <source src="/episodes/paperpulse_20260917_175526.mp3" type="audio/mpeg">
+          <source src="/episodes/paperpulse_20260917_180611.mp3" type="audio/mpeg">
           Your browser does not support the audio element.
         </audio>
 
         <p class="ep-summary">
-          In this episode, Alex and Sam dissect two groundbreaking papers from arXiv: untangling what really makes a good LLM tokenizer (compression objective vs. search procedure), and why zeroth-order optimization allows preference alignment without computing gradients.
+          In this episode, Alex and Sam unpack why search procedure dominates over compression objective in tokenizer quality, and explore ComPO: zeroth-order LLM preference optimization without backpropagating through preference loss.
         </p>
 
         <div class="papers-list">
-          <h4>Papers Discussed in this Episode</h4>
+          <h4>Papers Discussed</h4>
           <ul>
             <li>&bull; <a href="https://arxiv.org/abs/2609.19145v1" target="_blank">Objective vs. Search: Decomposing What Makes a Good Tokeniser</a> (Ahmetcan Yavuz et al.)</li>
             <li>&bull; <a href="https://arxiv.org/abs/2609.19144v1" target="_blank">A Zeroth-Order Paradigm for LLM Preference Alignment</a> (Peter Chen et al.)</li>
           </ul>
         </div>
+      </article>
+
+      <article class="episode-card">
+        <span class="ep-badge">Episode 1</span>
+        <h2 class="ep-title">#1: Pilot: Untangling Tokenizers & Zeroth-Order LLM Alignment</h2>
+        <div class="ep-meta">Duration: 4m 05s &bull; Standards: EBU R128 (-16 LUFS) &bull; 128 kbps CBR &bull; 3.74 MB</div>
+        
+        <audio controls preload="none">
+          <source src="/episodes/paperpulse_20260917_175526.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+
+        <p class="ep-summary">
+          The pilot episode introducing Alex and Sam breaking down the newest pre-prints from arXiv categories cs.AI, cs.LG, and cs.CL for commuters.
+        </p>
       </article>
     </main>
 
