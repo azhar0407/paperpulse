@@ -152,7 +152,7 @@ def run(base: Path, dry_run: bool = False):
         log.info("=== Step 4/5: Audio mastering ===")
         ep_filename = f"paperpulse_{ts}.mp3"
         ep_path = episodes_dir / ep_filename
-        master(segment_files, ep_path, assets_dir=assets_dir)
+        master(segment_files, ep_path, assets_dir=assets_dir, dialog=dialog)
 
         # Step 5: RSS feed
         log.info("=== Step 5/5: Updating RSS feed ===")

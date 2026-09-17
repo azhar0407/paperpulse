@@ -1,4 +1,4 @@
-"""writer.py — Generate structured podcast dialog JSON via LLM."""
+"""writer.py — Generate structured humanized podcast dialog JSON via LLM."""
 import json
 import os
 import time
@@ -6,6 +6,7 @@ import logging
 import urllib.request
 import urllib.error
 import ssl
+import re
 
 log = logging.getLogger(__name__)
 
@@ -23,26 +24,53 @@ def _get_ssl_context() -> ssl.SSLContext:
     except Exception:
         return ssl._create_unverified_context()
 
-SYSTEM_PROMPT = """You are a scriptwriter for "PaperPulse AI", an authentic, high-signal conversational podcast between two real practitioners:
-- Alex (Voice: en-US-AndrewMultilingualNeural): pragmatic engineer, slightly skeptical, cares about what breaks in production, talks with punchy rhythm and dry humor.
-- Sam (Voice: en-US-AvaMultilingualNeural): research scientist, deep in the math, honest about study limitations, candid about hype vs reality.
 
-Output ONLY a valid JSON array. No markdown, no code fences.
+SYSTEM_PROMPT = """You are writing a script for "PaperPulse AI", an authentic, unscripted-feeling tech podcast where two senior engineers discuss fresh AI research over coffee:
+- Alex (Voice: en-US-AndrewMultilingualNeural): Senior backend/ML infrastructure engineer. Pragmatic, skeptical of academic claims, cares about production latency, memory, and deployment costs. Speaks with punchy, conversational energy and dry humor.
+- Sam (Voice: en-US-AvaMultilingualNeural): Research scientist. Deeply understands the math and optimization theory, but is honest about benchmark hacking, data contamination, and study limitations.
+
+Output ONLY a valid JSON array. No markdown fences, no explanatory prose.
 Schema: [{"speaker": "Alex"|"Sam", "voice": "en-US-AndrewMultilingualNeural"|"en-US-AvaMultilingualNeural", "text": "..."}]
 
-ANTI-AI WRITING RULES (STRICT):
-1. BANNED PHRASES: Never use "What if I told you", "In today's fast-paced world", "At the end of the day", "Deep dive", "Unpack", "Game-changer", "It turns out", "Double down", "Delve", "Testament", "Pivotal", "Landscape".
-2. BANNED PATTERNS:
-   - No sycophantic praise ("Great point!", "You're absolutely right!", "Exactly!"). Real colleagues challenge each other or build directly without flattery.
-   - No kindergarten metaphors ("Imagine a pizza...", "Like a Lego castle..."). Speak like engineers talking to senior engineers.
-   - No rhetorical warm-ups or meta-signposting ("For our listeners today...", "Let's explore..."). Jump straight into the core technical tension.
-   - No formulaic TV sign-offs ("Join us tomorrow as we delve into..."). End abruptly on an authentic punchline, realization, or skeptical thought.
-3. CONVERSATIONAL REALISM:
-   - Varied turn lengths: Mix short reactive interjections ("Wait, seriously?", "That's wild.", "No way.") with substantive 2-3 sentence explanations.
-   - Disagreements & skepticism: Have Alex question whether benchmark improvements actually translate to production latency or cost.
-   - Natural spoken cadence: Use contractions (didn't, haven't, that's), informal transitions, and honest uncertainty ("I honestly have no idea how they got that number", "Their ablation section is pretty thin").
-   - Length: 25-35 turns total, totaling 800-1100 words across all segments.
+CRITICAL HUMANIZATION RULES:
+1. NEVER SOUND LIKE A TEXTBOOK OR SLIDE DECK:
+   - Do NOT give dictionary definitions ("BPE optimizes compression via bottom-up merges...").
+   - Instead, explain how it actually works colloquially ("Basically, BPE starts with letters and smashes the most common pairs together...").
+2. CONVERSATIONAL CADENCE & MICRO-REACTIONS:
+   - Real people do not trade 5-sentence monologues back and forth.
+   - Insert quick natural reactions: "Wait, seriously?", "That makes zero sense.", "Hold on a second...", "Right, exactly.", "I mean... look at the benchmarks."
+   - Let Alex interrupt or cut to the chase when Sam gets too deep into academic weeds.
+   - Use pauses and vocal rhythm: use ellipses "..." for brief thinking hesitations and em dashes "—" for natural self-corrections.
+3. ABSOLUTELY BANNED AI PHRASES & TROPES:
+   - NEVER start with: "What if I told you...", "Welcome back to...", "In today's fast-paced world...", "Have you ever wondered..."
+   - NEVER use filler tropes: "delve", "unpack", "game-changer", "landscape", "pivotal moment", "testament", "at the end of the day", "double down", "it turns out".
+   - NO childish metaphors: "Imagine cutting a pizza...", "Like building a Lego castle..." Speak to the audience like senior software engineers.
+   - NO sycophantic praise: Do NOT have them flatter each other ("Great question, Alex!", "You're absolutely right!").
+   - NO TV wrap-ups: Never say "Join us tomorrow as we explore..." End naturally on a humorous realization, an open question, or a cynical production reality.
+4. TARGET LENGTH:
+   - 28 to 36 dialog turns total.
+   - Word count: 800 to 1100 words.
 """
+
+
+def _normalize_speech_text(text: str) -> str:
+    """Clean text for natural TTS pronunciation (remove AI tics & pronunciation traps)."""
+    # Fix arXiv pronunciation: Edge-TTS says 'ar-ex-eye-vee', replace with 'archive'
+    text = re.sub(r'\barXiv\b', 'archive', text, flags=re.IGNORECASE)
+    # Common abbreviations that sound robotic when spelled out
+    replacements = [
+        (r'\be\.g\.,?\b', 'for example,'),
+        (r'\bi\.e\.,?\b', 'that is,'),
+        (r'\bvs\.\b', 'versus'),
+        (r'\bvs\b', 'versus'),
+        (r'\betc\.\b', 'and so on'),
+        (r'\bSOTA\b', 'state of the art'),
+        (r'—', ', '),  # em-dashes into natural micro-pauses
+        (r'–', ', '),
+    ]
+    for pattern, repl in replacements:
+        text = re.sub(pattern, repl, text, flags=re.IGNORECASE)
+    return text.strip()
 
 
 def _build_user_prompt(papers: list[dict]) -> str:
@@ -60,9 +88,9 @@ def _build_user_prompt(papers: list[dict]) -> str:
     papers_block = "\n\n".join(parts)
     count = len(papers)
     return (
-        f"Write a {count}-paper podcast episode for PaperPulse AI.\n\n"
+        f"Write a {count}-paper authentic conversational podcast dialogue between Alex and Sam for PaperPulse AI.\n\n"
         f"{papers_block}\n\n"
-        f"Output the dialog JSON array now."
+        f"Output ONLY the JSON array now."
     )
 
 
@@ -78,7 +106,7 @@ def _call_llm(prompt: str, system: str, retries: int = 3) -> str:
             {"role": "system", "content": system},
             {"role": "user", "content": prompt},
         ],
-        "temperature": 0.7,
+        "temperature": 0.8,
         "max_tokens": max_tokens,
     }).encode()
 
@@ -128,7 +156,6 @@ def generate_script(papers: list[dict]) -> list[dict]:
     log.info("Calling LLM to generate podcast script...")
     raw = _call_llm(prompt, SYSTEM_PROMPT)
 
-    # Strip markdown fences if model adds them
     content = raw.strip()
     if content.startswith("```"):
         lines = content.splitlines()
@@ -142,16 +169,19 @@ def generate_script(papers: list[dict]) -> list[dict]:
         log.error(f"JSON parse failed. Raw output:\n{content[:500]}")
         raise ValueError(f"LLM returned invalid JSON: {e}") from e
 
-    # Validate schema
     valid_voices = {"en-US-AndrewMultilingualNeural", "en-US-AvaMultilingualNeural"}
     for i, seg in enumerate(dialog):
         if not isinstance(seg, dict):
             raise ValueError(f"Segment {i} is not a dict")
         if "speaker" not in seg or "text" not in seg:
             raise ValueError(f"Segment {i} missing speaker or text")
+        
         default_voice = "en-US-AndrewMultilingualNeural" if seg["speaker"] == "Alex" else "en-US-AvaMultilingualNeural"
         if seg.get("voice") not in valid_voices:
             seg["voice"] = default_voice
+
+        # Clean speech phonetics
+        seg["text"] = _normalize_speech_text(seg["text"])
 
     log.info(f"Script generated: {len(dialog)} segments, ~{sum(len(s['text'].split()) for s in dialog)} words.")
     return dialog
