@@ -10,8 +10,9 @@ log = logging.getLogger(__name__)
 # Silence duration between segments (milliseconds)
 GAP_MS = 300
 
-# Industry standard podcast loudness (EBU R128)
+# Industry standard podcast loudness (EBU R128) & broadcast warmth EQ
 LOUDNORM = "loudnorm=I=-16:TP=-1.5:LRA=11"
+WARMTH_FILTER = "highpass=f=75,equalizer=f=280:t=q:w=1.2:g=1.5,equalizer=f=3400:t=q:w=1.5:g=1.0"
 
 
 def _ffmpeg(*args: str, check: bool = True) -> subprocess.CompletedProcess:
@@ -77,9 +78,15 @@ def master(
     tmp_dir = output_path.parent / f"_mastering_tmp_{uuid.uuid4().hex[:8]}"
     tmp_dir.mkdir(parents=True, exist_ok=True)
 
-    # Silence gap file
-    silence_path = tmp_dir / "silence.mp3"
-    _make_silence(gap_ms, silence_path)
+    # Dynamic organic silence gaps (mimic human conversation pacing)
+    silences = {
+        150: tmp_dir / "silence_150.mp3",
+        240: tmp_dir / "silence_240.mp3",
+        350: tmp_dir / "silence_350.mp3",
+        480: tmp_dir / "silence_480.mp3",
+    }
+    for ms, path in silences.items():
+        _make_silence(ms, path)
 
     # Build ordered file list
     ordered: list[Path] = []
@@ -89,16 +96,18 @@ def master(
 
     if intro and intro.exists():
         ordered.append(intro)
-        ordered.append(silence_path)
+        ordered.append(silences[350])
         log.info("Intro jingle included.")
 
+    gap_pattern = [240, 150, 350, 240, 480, 240, 150, 350]
     for i, seg in enumerate(segment_files):
         ordered.append(seg)
         if i < len(segment_files) - 1:
-            ordered.append(silence_path)
+            chosen_gap = gap_pattern[i % len(gap_pattern)]
+            ordered.append(silences[chosen_gap])
 
     if outro and outro.exists():
-        ordered.append(silence_path)
+        ordered.append(silences[350])
         ordered.append(outro)
         log.info("Outro jingle included.")
 
@@ -107,11 +116,11 @@ def master(
     log.info(f"Concatenating {len(ordered)} audio segments...")
     _concat_files(ordered, raw_concat)
 
-    # Step 2: Loudnorm two-pass
-    log.info("Applying EBU R128 loudnorm (pass 1: measure)...")
+    # Step 2: Loudnorm two-pass with broadcast warmth EQ
+    log.info("Applying broadcast EQ & EBU R128 loudnorm (pass 1: measure)...")
     pass1 = _ffmpeg(
         "-i", str(raw_concat),
-        "-af", f"{LOUDNORM}:print_format=json",
+        "-af", f"{WARMTH_FILTER},{LOUDNORM}:print_format=json",
         "-f", "null", "-",
         check=False,
     )
@@ -126,7 +135,7 @@ def master(
     except Exception as e:
         log.warning(f"Failed to parse loudnorm pass 1 stats: {e}")
 
-    log.info("Applying EBU R128 loudnorm (pass 2: apply)...")
+    log.info("Applying broadcast EQ & EBU R128 loudnorm (pass 2: apply)...")
     if measured.get("input_i") and measured.get("input_lra") and measured.get("input_tp"):
         loudnorm_filter = (
             f"{LOUDNORM}:"
@@ -143,7 +152,7 @@ def master(
 
     _ffmpeg(
         "-i", str(raw_concat),
-        "-af", loudnorm_filter,
+        "-af", f"{WARMTH_FILTER},{loudnorm_filter}",
         "-ar", "44100",
         "-codec:a", "libmp3lame",
         "-b:a", "128k",

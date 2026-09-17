@@ -27,6 +27,24 @@
       <link>https://paperpulse-d8w.pages.dev</link>
     </image>
     <item>
+      <title>#3: Objective vs. Search: Decomposing What M + A Zeroth-Order Paradigm for LLM Preferen</title>
+      <link>https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260917_181224.mp3</link>
+      <description>Today's episode covers 2 papers: Objective vs. Search: Decomposing What Makes a Good Tokeniser; and A Zeroth-Order Paradigm for LLM Preference Alignment.</description>
+      <pubDate>Thu, 17 Sep 2026 18:13:17 +0000</pubDate>
+      <guid isPermaLink="false">paperpulse-paperpulse_20260917_181224.mp3</guid>
+      <enclosure url="https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260917_181224.mp3" length="3619151" type="audio/mpeg" />
+      <itunes:title>#3: Objective vs. Search: Decomposing What M + A Zeroth-Order Paradigm for LLM Preferen</itunes:title>
+      <itunes:summary>Today's episode covers 2 papers: Objective vs. Search: Decomposing What Makes a Good Tokeniser; and A Zeroth-Order Paradigm for LLM Preference Alignment.</itunes:summary>
+      <itunes:duration>3:46</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:episode>3</itunes:episode>
+      <content:encoded>&lt;p&gt;Today's episode covers 2 papers: Objective vs. Search: Decomposing What Makes a Good Tokeniser; and A Zeroth-Order Paradigm for LLM Preference Alignment.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Papers covered:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.19145v1"&gt;Objective vs. Search: Decomposing What Makes a Good Tokeniser&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.19144v1"&gt;A Zeroth-Order Paradigm for LLM Preference Alignment&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>#2: Objective vs. Search: Decomposing What M + A Zeroth-Order Paradigm for LLM Preferen</title>
       <link>https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260917_180611.mp3</link>
       <description>Today's episode covers 2 papers: Objective vs. Search: Decomposing What Makes a Good Tokeniser; and A Zeroth-Order Paradigm for LLM Preference Alignment.</description>
@@ -62,6 +80,6 @@
 &lt;ul&gt;&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.19145v1"&gt;Objective vs. Search: Decomposing What Makes a Good Tokeniser&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.19144v1"&gt;A Zeroth-Order Paradigm for LLM Preference Alignment&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
     </item>
-    <lastBuildDate>Thu, 17 Sep 2026 18:06:42 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 18:13:17 +0000</lastBuildDate>
   </channel>
 </rss>

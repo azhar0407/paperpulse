@@ -8,9 +8,16 @@ import edge_tts
 log = logging.getLogger(__name__)
 
 
+VOICE_PROSODY = {
+    "en-US-AndrewMultilingualNeural": {"rate": "+5%", "pitch": "+0Hz"},
+    "en-US-AvaMultilingualNeural": {"rate": "+1%", "pitch": "-1Hz"},
+}
+
+
 async def _render_segment(index: int, voice: str, text: str, out_dir: Path, retries: int = 3) -> Path:
     out_path = out_dir / f"seg_{index:04d}.mp3"
     delay = 2.0
+    prosody = VOICE_PROSODY.get(voice, {"rate": "+0%", "pitch": "+0Hz"})
     for attempt in range(retries):
         if out_path.exists():
             try:
@@ -18,7 +25,12 @@ async def _render_segment(index: int, voice: str, text: str, out_dir: Path, retr
             except OSError:
                 pass
         try:
-            communicate = edge_tts.Communicate(text, voice)
+            communicate = edge_tts.Communicate(
+                text,
+                voice,
+                rate=prosody["rate"],
+                pitch=prosody["pitch"],
+            )
             await communicate.save(str(out_path))
 
             if not out_path.exists() or out_path.stat().st_size < 100:

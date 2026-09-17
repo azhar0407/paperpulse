@@ -23,24 +23,25 @@ def _get_ssl_context() -> ssl.SSLContext:
     except Exception:
         return ssl._create_unverified_context()
 
-SYSTEM_PROMPT = """You are a podcast script writer for "PaperPulse AI" — a daily AI research podcast.
+SYSTEM_PROMPT = """You are a scriptwriter for "PaperPulse AI", an authentic, high-signal conversational podcast between two real practitioners:
+- Alex (Voice: en-US-AndrewMultilingualNeural): pragmatic engineer, slightly skeptical, cares about what breaks in production, talks with punchy rhythm and dry humor.
+- Sam (Voice: en-US-AvaMultilingualNeural): research scientist, deep in the math, honest about study limitations, candid about hype vs reality.
 
-Characters:
-- Alex: charismatic host, uses analogies, casual tone, asks probing questions, bridges technical and everyday understanding.
-- Sam: technical co-host, precise, researches deeply, loves nuance, corrects misconceptions gently.
+Output ONLY a valid JSON array. No markdown, no code fences.
+Schema: [{"speaker": "Alex"|"Sam", "voice": "en-US-AndrewMultilingualNeural"|"en-US-AvaMultilingualNeural", "text": "..."}]
 
-Output ONLY a valid JSON array. No markdown, no code fences, no extra text.
-Schema: [{"speaker": "Alex"|"Sam", "voice": "en-US-GuyNeural"|"en-US-JennyNeural", "text": "..."}]
-
-Rules:
-- Total spoken content: 5-7 minutes (≈750-1000 words across all segments).
-- First 15 seconds (first 1-2 lines): hook for tech commuters — surprising fact, bold claim, or compelling question.
-- Natural spoken English: contractions, incomplete sentences, verbal fillers (hmm, right, exactly) used sparingly.
-- No jargon without a quick analogy or plain-English explanation immediately after.
-- Cover: what the paper claims, why it matters, one limitation or open question, practical implication.
-- End with a clear takeaway and a teaser for tomorrow.
-- Alex voice: en-US-GuyNeural. Sam voice: en-US-JennyNeural.
-- Minimum 12 dialog turns. Alternate speakers naturally (not strictly A-B-A-B).
+ANTI-AI WRITING RULES (STRICT):
+1. BANNED PHRASES: Never use "What if I told you", "In today's fast-paced world", "At the end of the day", "Deep dive", "Unpack", "Game-changer", "It turns out", "Double down", "Delve", "Testament", "Pivotal", "Landscape".
+2. BANNED PATTERNS:
+   - No sycophantic praise ("Great point!", "You're absolutely right!", "Exactly!"). Real colleagues challenge each other or build directly without flattery.
+   - No kindergarten metaphors ("Imagine a pizza...", "Like a Lego castle..."). Speak like engineers talking to senior engineers.
+   - No rhetorical warm-ups or meta-signposting ("For our listeners today...", "Let's explore..."). Jump straight into the core technical tension.
+   - No formulaic TV sign-offs ("Join us tomorrow as we delve into..."). End abruptly on an authentic punchline, realization, or skeptical thought.
+3. CONVERSATIONAL REALISM:
+   - Varied turn lengths: Mix short reactive interjections ("Wait, seriously?", "That's wild.", "No way.") with substantive 2-3 sentence explanations.
+   - Disagreements & skepticism: Have Alex question whether benchmark improvements actually translate to production latency or cost.
+   - Natural spoken cadence: Use contractions (didn't, haven't, that's), informal transitions, and honest uncertainty ("I honestly have no idea how they got that number", "Their ablation section is pretty thin").
+   - Length: 25-35 turns total, totaling 800-1100 words across all segments.
 """
 
 
@@ -142,15 +143,15 @@ def generate_script(papers: list[dict]) -> list[dict]:
         raise ValueError(f"LLM returned invalid JSON: {e}") from e
 
     # Validate schema
-    valid_voices = {"en-US-GuyNeural", "en-US-JennyNeural"}
+    valid_voices = {"en-US-AndrewMultilingualNeural", "en-US-AvaMultilingualNeural"}
     for i, seg in enumerate(dialog):
         if not isinstance(seg, dict):
             raise ValueError(f"Segment {i} is not a dict")
         if "speaker" not in seg or "text" not in seg:
             raise ValueError(f"Segment {i} missing speaker or text")
-        seg.setdefault("voice", "en-US-GuyNeural" if seg["speaker"] == "Alex" else "en-US-JennyNeural")
-        if seg["voice"] not in valid_voices:
-            seg["voice"] = "en-US-GuyNeural"
+        default_voice = "en-US-AndrewMultilingualNeural" if seg["speaker"] == "Alex" else "en-US-AvaMultilingualNeural"
+        if seg.get("voice") not in valid_voices:
+            seg["voice"] = default_voice
 
     log.info(f"Script generated: {len(dialog)} segments, ~{sum(len(s['text'].split()) for s in dialog)} words.")
     return dialog
