@@ -27,6 +27,24 @@
       <link>https://paperpulse-d8w.pages.dev</link>
     </image>
     <item>
+      <title>#6: Coding Agents with an Obstacle-Aware Har + Embedding Models Measure in Peculiar Way</title>
+      <link>https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260918_053100.mp3</link>
+      <description>Today's episode covers 2 papers: Coding Agents with an Obstacle-Aware Harness for Safe Robot Manipulation; and Embedding Models Measure in Peculiar Ways.</description>
+      <pubDate>Fri, 18 Sep 2026 05:31:58 +0000</pubDate>
+      <guid isPermaLink="false">paperpulse-paperpulse_20260918_053100.mp3</guid>
+      <enclosure url="https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260918_053100.mp3" length="5594009" type="audio/mpeg" />
+      <itunes:title>#6: Coding Agents with an Obstacle-Aware Har + Embedding Models Measure in Peculiar Way</itunes:title>
+      <itunes:summary>Today's episode covers 2 papers: Coding Agents with an Obstacle-Aware Harness for Safe Robot Manipulation; and Embedding Models Measure in Peculiar Ways.</itunes:summary>
+      <itunes:duration>5:49</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:episode>6</itunes:episode>
+      <content:encoded>&lt;p&gt;Today's episode covers 2 papers: Coding Agents with an Obstacle-Aware Harness for Safe Robot Manipulation; and Embedding Models Measure in Peculiar Ways.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Papers covered:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.20822v1"&gt;Coding Agents with an Obstacle-Aware Harness for Safe Robot Manipulation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.20821v1"&gt;Embedding Models Measure in Peculiar Ways&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>#5: Objective vs. Search: Decomposing What M + A Zeroth-Order Paradigm for LLM Preferen</title>
       <link>https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260917_184205.mp3</link>
       <description>Today's episode covers 2 papers: Objective vs. Search: Decomposing What Makes a Good Tokeniser; and A Zeroth-Order Paradigm for LLM Preference Alignment.</description>
@@ -116,6 +134,6 @@
 &lt;ul&gt;&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.19145v1"&gt;Objective vs. Search: Decomposing What Makes a Good Tokeniser&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.19144v1"&gt;A Zeroth-Order Paradigm for LLM Preference Alignment&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
     </item>
-    <lastBuildDate>Thu, 17 Sep 2026 18:42:59 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 18 Sep 2026 05:31:58 +0000</lastBuildDate>
   </channel>
 </rss>
