@@ -27,6 +27,24 @@
       <link>https://paperpulse-d8w.pages.dev</link>
     </image>
     <item>
+      <title>#8: Coding Agents with an Obstacle-Aware Har + Embedding Models Measure in Peculiar Way</title>
+      <link>https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260920_054110.mp3</link>
+      <description>Today's episode covers 2 papers: Coding Agents with an Obstacle-Aware Harness for Safe Robot Manipulation; and Embedding Models Measure in Peculiar Ways.</description>
+      <pubDate>Sun, 20 Sep 2026 05:42:01 +0000</pubDate>
+      <guid isPermaLink="false">paperpulse-paperpulse_20260920_054110.mp3</guid>
+      <enclosure url="https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260920_054110.mp3" length="4097297" type="audio/mpeg" />
+      <itunes:title>#8: Coding Agents with an Obstacle-Aware Har + Embedding Models Measure in Peculiar Way</itunes:title>
+      <itunes:summary>Today's episode covers 2 papers: Coding Agents with an Obstacle-Aware Harness for Safe Robot Manipulation; and Embedding Models Measure in Peculiar Ways.</itunes:summary>
+      <itunes:duration>4:16</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:episode>8</itunes:episode>
+      <content:encoded>&lt;p&gt;Today's episode covers 2 papers: Coding Agents with an Obstacle-Aware Harness for Safe Robot Manipulation; and Embedding Models Measure in Peculiar Ways.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Papers covered:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.20822v1"&gt;Coding Agents with an Obstacle-Aware Harness for Safe Robot Manipulation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.20821v1"&gt;Embedding Models Measure in Peculiar Ways&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>#7: Coding Agents with an Obstacle-Aware Har + Embedding Models Measure in Peculiar Way</title>
       <link>https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260919_052835.mp3</link>
       <description>Today's episode covers 2 papers: Coding Agents with an Obstacle-Aware Harness for Safe Robot Manipulation; and Embedding Models Measure in Peculiar Ways.</description>
@@ -152,6 +170,6 @@
 &lt;ul&gt;&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.19145v1"&gt;Objective vs. Search: Decomposing What Makes a Good Tokeniser&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.19144v1"&gt;A Zeroth-Order Paradigm for LLM Preference Alignment&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
     </item>
-    <lastBuildDate>Sat, 19 Sep 2026 05:29:17 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 05:42:01 +0000</lastBuildDate>
   </channel>
 </rss>
