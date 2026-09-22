@@ -27,6 +27,24 @@
       <link>https://paperpulse-d8w.pages.dev</link>
     </image>
     <item>
+      <title>#9: GameHorizon Suite: Multi-Horizon Data an + Critical-State RL: Diagnosing Trainable </title>
+      <link>https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260922_054907.mp3</link>
+      <description>Today's episode covers 2 papers: GameHorizon Suite: Multi-Horizon Data and Evaluation in Gameplay; and Critical-State RL: Diagnosing Trainable States for Multi-Turn Tool Use.</description>
+      <pubDate>Tue, 22 Sep 2026 05:49:55 +0000</pubDate>
+      <guid isPermaLink="false">paperpulse-paperpulse_20260922_054907.mp3</guid>
+      <enclosure url="https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260922_054907.mp3" length="4778153" type="audio/mpeg" />
+      <itunes:title>#9: GameHorizon Suite: Multi-Horizon Data an + Critical-State RL: Diagnosing Trainable </itunes:title>
+      <itunes:summary>Today's episode covers 2 papers: GameHorizon Suite: Multi-Horizon Data and Evaluation in Gameplay; and Critical-State RL: Diagnosing Trainable States for Multi-Turn Tool Use.</itunes:summary>
+      <itunes:duration>4:58</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:episode>9</itunes:episode>
+      <content:encoded>&lt;p&gt;Today's episode covers 2 papers: GameHorizon Suite: Multi-Horizon Data and Evaluation in Gameplay; and Critical-State RL: Diagnosing Trainable States for Multi-Turn Tool Use.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Papers covered:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.25001v1"&gt;GameHorizon Suite: Multi-Horizon Data and Evaluation in Gameplay&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.24985v1"&gt;Critical-State RL: Diagnosing Trainable States for Multi-Turn Tool Use&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>#8: Coding Agents with an Obstacle-Aware Har + Embedding Models Measure in Peculiar Way</title>
       <link>https://paperpulse-d8w.pages.dev/episodes/paperpulse_20260920_054110.mp3</link>
       <description>Today's episode covers 2 papers: Coding Agents with an Obstacle-Aware Harness for Safe Robot Manipulation; and Embedding Models Measure in Peculiar Ways.</description>
@@ -170,6 +188,6 @@
 &lt;ul&gt;&lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.19145v1"&gt;Objective vs. Search: Decomposing What Makes a Good Tokeniser&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://arxiv.org/abs/2609.19144v1"&gt;A Zeroth-Order Paradigm for LLM Preference Alignment&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
     </item>
-    <lastBuildDate>Sun, 20 Sep 2026 05:42:01 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 05:49:55 +0000</lastBuildDate>
   </channel>
 </rss>
